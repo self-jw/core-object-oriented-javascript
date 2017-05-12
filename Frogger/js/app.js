@@ -9,7 +9,6 @@ var Enemy = function (x, y, speed) {
   // The image/sprite for our enemies, this uses
   // a helper we've provided to easily load images
   this.sprite = 'images/enemy-bug.png';
-  console.log(this);
 };
 
 // Update the enemy's position, required method for game
@@ -19,8 +18,6 @@ Enemy.prototype.update = function (dt) {
   // which will ensure the game runs at the same speed for
   // all computers.
   this.speed = this.getRandomNumber(200, 500);
-
-  // console.log('Speed',this.speed);
 
   this.x += this.speed * dt;
   if (this.x > 400) {
@@ -42,13 +39,12 @@ Enemy.prototype.render = function () {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function (x, y, speed, enemies) {
+var Player = function (x, y, speed) {
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
   this.x = x;
   this.y = y;
   this.speed = speed;
-  this.enemies = enemies;
 
   // The image/sprite for our enemies, this uses
   // a helper we've provided to easily load images
@@ -57,9 +53,13 @@ var Player = function (x, y, speed, enemies) {
 
 Player.prototype.update = function () {
   // Reset to starting position when there is a collision.
-  for (var enemy in this.enemies) {
-    if (enemy.x === this.x && enemy.y === this.y) {
-      this.resetPosition;
+  for (var enemy = 0; enemy < allEnemies.length; enemy++) {
+    if (allEnemies[enemy].x > (this.x - 60) && (allEnemies[enemy].x < this.x + 60)) {
+      if (allEnemies[enemy].y > (this.y - 60) && (allEnemies[enemy].y < this.y + 60)) {
+        this.resetPosition;
+        this.x = 200;
+        this.y = 365;
+      }
     }
   }
 };
@@ -105,7 +105,7 @@ Player.prototype.handleInput = function (e) {
 
   // Player has hit the top edge.
   // Player has won the game!
-  if (this.y < -10) {
+  if (this.y < 0) {
     this.x = 200;
     this.y = 365;
   }
@@ -114,8 +114,6 @@ Player.prototype.handleInput = function (e) {
   if (this.y > 365) {
     this.y = 365;
   }
-
-  console.log('X:',this.x, '  Y:',this.y);
 
 };
 
@@ -127,9 +125,7 @@ allEnemies.push(new Enemy(-260, 60, 300));
 allEnemies.push(new Enemy(-110, 145, 300));
 allEnemies.push(new Enemy(-320, 230, 300));
 
-var player = new Player(200, 365, 1, allEnemies);
-console.log(player);
-console.log(allEnemies);
+var player = new Player(200, 365, 1);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
