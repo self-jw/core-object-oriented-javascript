@@ -2,6 +2,7 @@
 
 Team-name: #normal-reedbuck
 Authors: [@self-jw, Jolly Walia](https://github.com/self-jw)
+
 JS Dev link: http://jsdev.learnersguild.org/goals/165-Core_Object_Oriented_JavaScript.html
 
 Review Link: [Project Review Link](https://https://github.com/self-jw/core-object-oriented-javascript)
